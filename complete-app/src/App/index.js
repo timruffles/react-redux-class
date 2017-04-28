@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.css';
-import {Toast} from '../Toast/index';
 import {ChatThread} from '../ChatThread/index';
 import {ChatControls} from '../ChatControls/index';
 import {connect} from 'react-redux';
@@ -19,7 +18,6 @@ const ChatThreadContainer = connect(ChatSelectors.chatThreadProps)(ChatThread);
 
 export function App() {
   return <div className="App">
-    <Toast />
     <ChatThreadContainer />
     <ChatControlsContainer />
   </div>

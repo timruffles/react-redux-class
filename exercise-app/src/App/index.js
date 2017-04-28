@@ -18,7 +18,6 @@ const ChatThreadContainer = connect(ChatSelectors.chatThreadProps)(ChatThread);
 
 export function App() {
   return <div className="App">
-    <Toast />
     <ChatThreadContainer />
     <ChatControlsContainer />
   </div>

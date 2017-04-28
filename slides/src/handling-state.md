@@ -190,7 +190,7 @@ function reducer(state, action) {
 
 ## Exercise
 
-    FirstReactPage
+    exercise-app/src/FirstReduxPage
 
     Building an Avatar picker
 
