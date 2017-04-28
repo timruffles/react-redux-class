@@ -136,6 +136,32 @@ const failureState = {
       }
     }
 
+## Reducers + Actions + Selectors
+
+## Coherent feature unit
+
+## Often makes sense to test them together
+
+## 🃏 Jest 🃏
+
+## Same old test syntax
+
+## Nicer test runner!
+
+## e.g
+
+
+```javascript
+
+describe("chat feature", () => {
+  it("records chats received", () => {
+    expect(x).toEqual(y);
+  });
+})
+```
+
+## Let's walk through a test together
+
 ## Reducer exercise
 {title:1}
 
