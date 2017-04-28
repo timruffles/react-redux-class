@@ -1,0 +1,17 @@
+{
+  "name": "react-redux-class",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "cd exercise-app && npm install && cd ../server && npm install && cd ../complete-app && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timruffles/react-redux-class.git"
+  },
+  "private": true,
+  "author": "Tim Ruffles <timruffles@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/timruffles/react-redux-class/issues"
+  },
+  "homepage": "https://github.com/timruffles/react-redux-class#readme"
+}
