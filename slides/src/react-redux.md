@@ -115,14 +115,18 @@ const prepareActions = () => (
 const UserProfileContainer = connect(mapStateToProps)(UserProfile);
 ```
 
-## Exercise: from scratch
+## Exercise
 
-- `create-react-app` and create a third app directory
+- Use `create-react-app` to create a 3d app directory
 - Define a component
 - Include it into App
 - Define a reducer
 - Define a selector
 - Define an action
+- then...
+
+## ...wire it up
+
 - Using react-redux, wire the state into your component's props, and
   ensure the component dispatches an action on some UI integration
 - Well done: you've cracked it!

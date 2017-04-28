@@ -26,7 +26,7 @@
   },
   "scripts": {
     "slides": "tools/build-template.sh src < index.template.md > index.html",
-    "slides:dev": "nodemon --ext md,js,css --watch src,js,templates,tools --exec 'npm run slides'"
+    "slides:dev": "nodemon --ext md,js,css --watch src -w js -w templates -w tools --exec 'npm run slides'"
   },
   "license": "©"
 }

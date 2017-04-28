@@ -11,7 +11,7 @@ interaction
 
 handling state
 
-react + redux
+react redux
 
 modelling state
 

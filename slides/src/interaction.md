@@ -45,7 +45,7 @@ const ImagePicker = ({onPicked}) => {
       Say hi 
     </button>
     <img src='some-image' 
-         ref={el => ( picked = el )}>
+         ref={el => ( picked = el )} />
   </div>
 }
 
@@ -53,7 +53,7 @@ const ImagePicker = ({onPicked}) => {
 
 ## Storybook has a way to see events
 
-![img](./img/storybook-events)
+![img](./img/storybook-events.png)
 
 ## Code
 

@@ -400,7 +400,8 @@ const listOfThree = &lt;Items items={three} /&gt;
 </code></pre></section>
 
 <section  class=""><h2 id="exercise-3-">Exercise 3!</h2>
-</section>
+<pre><code>Implement ChatThread
+</code></pre></section>
 
 <section data-state='title' class=" title"><h2 id="interaction">Interaction</h2>
 </section>
@@ -446,13 +447,13 @@ ReactDOM.render(Clicker, document.body)
       Say hi 
     </button>
     <img src='some-image' 
-         ref={el => ( picked = el )}&gt;
+         ref={el => ( picked = el )} /&gt;
   </div>
 }</p>
 </section>
 
 <section  class=""><h2 id="storybook-has-a-way-to-see-events">Storybook has a way to see events</h2>
-<p><img src="./img/storybook-events" alt="img"></p>
+<p><img src="./img/storybook-events.png" alt="img"></p>
 </section>
 
 <section  class=""><h2 id="code">Code</h2>
@@ -679,10 +680,169 @@ function reducer(state, action) {
 </section>
 
 <section  class=""><h2 id="exercise">Exercise</h2>
-<pre><code>FirstReactPage
+<pre><code>exercise-app/src/FirstReduxPage
 
 Building an Avatar picker
 </code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="wiring-up-react-redux">Wiring up React + Redux</h2>
+</section>
+
+<section  class=""><h2 id="requirements">Requirements</h2>
+</section>
+
+<section  class=""><h2 id="state-from-store-to-ui">State from store to UI</h2>
+</section>
+
+<section  class=""><h2 id="actions-from-ui-to-store">Actions from UI to store</h2>
+</section>
+
+<section  class=""><h2 id="loop">Loop</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="not-many-component-should-know-about-redux-">Not many component should know about Redux!</h2>
+</section>
+
+<section  class=""><h2 id="connected-presentation">Connected + presentation</h2>
+</section>
+
+<section  class=""><h2 id="presentation-components-aka-">Presentation components, AKA...</h2>
+<ul>
+<li>dumb components</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="presentation-components-take-data-draw">Presentation components take data, draw</h2>
+<ul>
+<li>Presentation components take in <em>values</em> and render them</li>
+<li>They emit <em>values</em> when users interact</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="why-values">Why values</h2>
+<ul>
+<li>Canned values can be easily produced</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="values-v-objects">Values v objects</h2>
+<ul>
+<li>Values = no identity</li>
+<li>Values = compare by value</li>
+<li>Values = immutable</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="stories">Stories</h2>
+<ul>
+<li>If a dumb component only consumes values, can easily produce useful storybooks</li>
+<li>Work on your component in complete isolation from rest of app</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="connected-components-aka-">Connected components, AKA...</h2>
+<ul>
+<li>smart components</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="connect-to-store">Connect to store</h2>
+<ul>
+<li>links up the dumb components to your app</li>
+<li>these are very coupled to a specific context</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="connected-components">Connected components</h2>
+<ul>
+<li>usually quite &#39;thin&#39;</li>
+<li>interesting stuff happens in reducers etc</li>
+<li>think: glue</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="with-the-functional-style-">With the functional style...</h2>
+<ul>
+<li>we probably only need to write one function</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="-mapstatetoprops-"><code>mapStateToProps</code></h2>
+<ul>
+<li>Given states, returns a component&#39;s props</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="wiring">Wiring</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+import { App } from &quot;./index&quot;;
+import { appStore } from &#39;./store&#39;;
+import { Provider } from &#39;react-redux&#39;;
+
+ReactDOM.render(
+  &lt;Provider store={appStore}&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;,
+  document.getElementById(&#39;root&#39;)
+);
+</code></pre>
+</section>
+
+<section  class=""><h2 id="container-component">Container component</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+import {connect} from &#39;react-redux&#39;;
+
+const UserProfile = ({username}) =&gt; (
+  &lt;span className=&#39;UserProfile&#39;&gt;{ username }&lt;/span&gt;
+)
+
+// this returns props ready for a component
+const mapStateToProps = ({ user: { username }}) =&gt; (
+  { username }
+);
+
+// now using &lt;UserProfileContainer /&gt; we can render our thread, while
+// keeping UserProfile ignorant of redux&#39;s existence
+const UserProfileContainer = connect(mapStateToProps)(UserProfile);
+
+// this wouldn&#39;t work alone - can you think why?
+// const userProfile = &lt;UserProfileContainer&gt;
+</code></pre>
+</section>
+
+<section  class=""><h2 id="map-state-to-actions">Map state to actions</h2>
+<pre><code class="lang-javascript">
+const prepareActions = () =&gt; (
+  {
+    // pass in action creators, they will be wrapped in dispatch()
+    onChangePassword: UserProfileActions.changePassword,
+  }
+)
+
+const UserProfileContainer = connect(mapStateToProps)(UserProfile);
+</code></pre>
+</section>
+
+<section  class=""><h2 id="exercise">Exercise</h2>
+<ul>
+<li>Use <code>create-react-app</code> to create a 3d app directory</li>
+<li>Define a component</li>
+<li>Include it into App</li>
+<li>Define a reducer</li>
+<li>Define a selector</li>
+<li>Define an action</li>
+<li>then...</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="-wire-it-up">...wire it up</h2>
+<ul>
+<li>Using react-redux, wire the state into your component&#39;s props, and
+ensure the component dispatches an action on some UI integration</li>
+<li>Well done: you&#39;ve cracked it!</li>
+</ul>
+</section>
 
 <section data-state='title' class=" title"><h2 id="modeling-state">Modeling state</h2>
 </section>
@@ -836,6 +996,16 @@ const failureState = {
 }
 </code></pre></section>
 
+<section data-state='title' class=" title"><h2 id="reducer-exercise">Reducer exercise</h2>
+<p>  Implement the chat reducer</p>
+<p>  We&#39;ll use:</p>
+<ul>
+<li>our knowledge of immutable structures</li>
+<li>of normalization</li>
+<li>and of the concept of the RemoteValue abstraction</li>
+</ul>
+</section>
+
 <section data-state='title' class=" title"><h2 id="scary-world-outside-redux">Scary world outside Redux</h2>
 </section>
 
@@ -909,7 +1079,16 @@ const failureState = {
 <section  class=""><h2 id="real-time">Real-time</h2>
 </section>
 
+<section  class=""><h2 id="walk-through">Walk-through</h2>
+<ul>
+<li>Implementing fetching, and creating chats</li>
+</ul>
+</section>
+
 <section data-state='title' class=" title"><h2 id="designing-react-redux-apps">Designing React + Redux apps</h2>
+</section>
+
+<section  class=""><h2 id="examples-from-the-room-">Examples from the room!</h2>
 </section>
 
 <section  class=""><h2 id="thanks-">Thanks!</h2>
