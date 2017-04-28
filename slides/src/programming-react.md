@@ -93,6 +93,8 @@
 
 ## Exercise 3!
 
+    Implement ChatThread
+
     
 
 
