@@ -1,0 +1,32 @@
+/*
+ This file sets up our CSS baseline - it'd be a good place to use normalize or similar.
+
+ Everything that styles a given component should live with that component. This is the
+ React philosophy of preferring composition above inheritance in CSS (n.b *prefer*, not *in exclusion of*).
+
+ The small set of rules here perform some boiler-plate we'd otherwise have to repeat throughout the app.
+ */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* configure border-box everywhere */
+* {
+  box-sizing: inherit;
+}
+body {
+  box-sizing: border-box;
+}
+
+
+/* reset list styling */
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}

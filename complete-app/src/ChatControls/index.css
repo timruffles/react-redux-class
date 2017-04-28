@@ -1,0 +1,17 @@
+
+
+.ChatControls {
+    position: absolute;
+
+    width: 100%;
+    height: 200px;
+
+    bottom: 0;
+
+    /* move off bottom of screen by default */
+    transform: translate3d(0, 100px, 0);
+
+    transition: transform ease-in-out;
+
+    background: #2ddeb1;
+}

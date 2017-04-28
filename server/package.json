@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engine": {
+    "node": ">= 6.9.1"
+  },
+  "engineStrict": true,
+  "dependencies": {
+    "restify": "~2.8.2",
+    "cors": "~2.4.1",
+    "body-parser": "~1.6.5",
+    "express": "~4.8.5",
+    "morgan": "~1.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "~1.2.1"
+  }
+}

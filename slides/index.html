@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>React + Redux - Tim Ruffles - Slides</title>
+  
+  <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.min.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/lib/css/zenburn.css">
+
+  <link rel="stylesheet" href="slides-theme/style.css">
+  <link rel="stylesheet" href="slides-theme/talk-specific.css">
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- demos -->
+
+  <!-- for live coding -->
+  <link rel="stylesheet" href="js/little-console.css" id="theme">
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24335480-1']);
+  _gaq.push(['_trackPageview']);
+
+  var asyncScript = function(src) {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = src;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  };
+
+  asyncScript(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
+  </script>
+
+  <script src="js/revealHooks.js"></script>
+
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+<section  class=""><h2 id="react-redux">React + Redux</h2>
+</section>
+
+<section  class=""><h2 id="agenda">Agenda</h2>
+<ul>
+<li>React + JSX</li>
+<li>Interaction</li>
+<li>Handling state with Redux</li>
+<li>React + Redux</li>
+<li>Redux + outside world</li>
+<li>Playtime</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="we-re-going-to-be-building-">We&#39;re going to be building...</h2>
+</section>
+
+<section data-state='notitle' class=" notitle"><h2 id="-"> </h2>
+<p><img src="./img/chat.png" alt="chat"></p>
+</section>
+
+<section  class=""><h2 id="happy-chat-">Happy chat!</h2>
+</section>
+
+<section  class=""><h2 id="why-s-am-i-excited-about-react-redux-">Why&#39;s am I excited about React + Redux?</h2>
+</section>
+
+<section data-state='bad' class=" bad"><h2 id="it-takes-longer-to-make-apps">It takes longer to make apps</h2>
+</section>
+
+<section  class=""><h2 id="boiler-plate">Boiler-plate</h2>
+</section>
+
+<section data-state='bad' class=" bad"><h2 id="i-ve-observed-inferior-performance">I&#39;ve observed inferior performance</h2>
+</section>
+
+<section  class=""><h2 id="virtual-dom">Virtual DOM</h2>
+<ul>
+<li>Additional layer of abstraction vs jQuery or Vanilla</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="redux">Redux</h2>
+<ul>
+<li>Slower and wasteful of memory vs mutating objects</li>
+</ul>
+</section>
+
+<section data-state='bad' class=" bad"><h2 id="i-ve-found-simple-things-hard">I&#39;ve found simple things hard</h2>
+</section>
+
+<section  class=""><h2 id="i-have-to-think-loads-about-my-data-structures">I have to think loads about my data-structures</h2>
+</section>
+
+<section  class=""><h2 id="and-the-structure-of-the-app">and the structure of the app</h2>
+</section>
+
+<section  class=""><h2 id="it-makes-sharing-data-a-puzzle">It makes sharing data a puzzle</h2>
+</section>
+
+<section  class=""><h2 id="but-">But...</h2>
+</section>
+
+<section  class=""><h2 id="-longer-to-start-wins-medium-to-long">...longer to start, wins medium to long</h2>
+</section>
+
+<section  class=""><h2 id="-locally-slower-globablly-faster">...locally slower, globablly faster</h2>
+</section>
+
+<section  class=""><h2 id="-easy-things-harder-hard-things-possible">...easy things harder, hard things possible</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="hello-react">Hello React</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="jsx">JSX</h2>
+</section>
+
+<section  class=""><h2 id="embedding-html-in-js">Embedding HTML in JS</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const avatar = &lt;img src=&#39;./avatars/hippo.png&#39; /&gt;;
+</code></pre></section>
+
+<section  class=""><h2 id="-as-a-first-class-value">...as a first-class value</h2>
+</section>
+
+<section  class=""><h2 id="e-g-assign-to-variables">e.g assign to variables</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const avatar = &lt;img src=&#39;./avatars/hippo.png&#39; /&gt;;
+</code></pre></section>
+
+<section  class=""><h2 id="e-g-pass-into-functions">e.g pass into functions</h2>
+<pre><code>import React from &#39;react&#39;;
+
+console.log(
+  &lt;ul&gt;
+    &lt;li&gt;Parrot&lt;/li&gt;
+    &lt;li&gt;Elephant&lt;/li&gt;
+  &lt;/ul&gt;
+);
+</code></pre></section>
+
+<section  class=""><h2 id="e-g-return-from-functions">e.g return from functions</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const List = () =&gt; (
+  &lt;ul&gt;
+    &lt;li&gt;Parrot&lt;/li&gt;
+    &lt;li&gt;Elephant&lt;/li&gt;
+  &lt;/ul&gt;
+);
+</code></pre></section>
+
+<section  class=""><h2 id="configure-editors-now-">Configure editors now...</h2>
+<p><img src="img/editor.png" alt="editors"></p>
+</section>
+
+<section  class=""><h2 id="exercise-then-i-ll-show-you-around-the-app">Exercise, then I&#39;ll show you around the app</h2>
+</section>
+
+<section  class=""><h2 id="exercise-1">Exercise 1</h2>
+<pre><code>cd exercise-app
+npm install
+npm run storybook
+
+# edit exercise-app/src/Avatar/story.js
+</code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="the-app">The app</h2>
+</section>
+
+<section  class=""><h2 id="uses-create-react-app-">Uses <code>create-react-app</code></h2>
+<ul>
+<li>Quick start</li>
+<li>Zero-config</li>
+<li>Instant gratification!<ul>
+<li>Storybooks</li>
+<li>Jest testing</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="jsx-in-more-depth">JSX in more depth</h2>
+</section>
+
+<section  class=""><h2 id="compiled">Compiled</h2>
+<pre>
+<code>
+const List = &lt;p&gt;Parrot&lt;/p&gt;
+</code>
+</pre>
+<pre>
+<code>
+var List = React.createElement(
+  &quot;p&quot;,
+  null,
+  &quot;Parrot&quot;
+);
+</code>
+</pre>
+
+</section>
+
+<section  class=""><h2 id="let-s-play-around-in-the-console">Let&#39;s play around in the console</h2>
+<pre><code class="lang-javascript">ReactDOM.render(
+  React.createElement(&#39;div&#39;, {
+    style: {
+      color: &#39;red&#39;,
+      fontSize: &#39;44px&#39;,
+    },
+  }, &#39;hello&#39;),
+  document.body
+)
+</code></pre>
+</section>
+
+<section  class=""><h2 id="the-famous-virtual-dom-">The famous &#39;virtual DOM&#39;</h2>
+<ul>
+<li>Just JS data-structures</li>
+<li>Very similar to the actual DOM (without all the methods etc)</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="reconciling-the-two">Reconciling the two</h2>
+<ul>
+<li>What changes need to be made to the actual DOM...</li>
+<li>...to bring it into line with VirtualDOM provided</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="get-a-feel-for-what-s-going-on-with-virtualdom">Get a feel for what&#39;s going on with VirtualDOM</h2>
+<p><img src="img/virtual-dom.png" alt="vdom"></p>
+</section>
+
+<section  class=""><h2 id="console-again">Console again</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="creating-components">Creating components</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+
+const Parrot = () =&gt; (
+  &lt;img src=&quot;images/avatars/parrot.svg&quot; /&gt;
+);
+
+
+const twoParrots = &lt;div&gt;
+  &lt;Parrot /&gt;
+  &lt;Parrot /&gt;
+&lt;/div&gt;
+</code></pre>
+</section>
+
+<section  class=""><h2 id="one-of-the-best-things-about-jsx">One of the best things about JSX</h2>
+</section>
+
+<section  class=""><h2 id="-zero-cruft-custom-components">...zero-cruft custom components</h2>
+</section>
+
+<section  class=""><h2 id="templating">Templating</h2>
+<ul>
+<li>Interpolate JS expressions via <code>{ ... }</code></li>
+<li>Can be attributes or child expressions</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="interpolating">Interpolating</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const Avatar = (name) =&gt; (
+  &lt;img src={&#39;./avatars/&#39; + name + &#39;.png&#39;} /&gt;
+);
+
+const Loud = (name) =&gt; (
+  &lt;h2&gt;{ name.toUppercase() }&lt;/h2&gt;
+);
+</code></pre></section>
+
+<section  class=""><h2 id="all-together">All together</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const Avatar = (name) =&gt; (
+  &lt;img src={&#39;./avatars/&#39; + name + &#39;.png&#39;} /&gt;
+);
+
+const avatarList = () =&gt; (
+  &lt;ul&gt;
+    &lt;Avatar avatar=&#39;parrot&#39; /&gt;
+    &lt;Avatar avatar=&#39;hippo&#39; /&gt;
+  &lt;/ul&gt;
+);
+
+// we would see &lt;body&gt;&lt;ul&gt;&lt;img /&gt;&lt;/img /&gt;&lt;/ul&gt;&lt;/body&gt;
+ReactDOM.render(avatarList(), document.body)
+</code></pre></section>
+
+<section  class=""><h2 id="no-framework-cruft-in-dom-">No framework cruft in DOM!</h2>
+</section>
+
+<section  class=""><h2 id="exercise-2">Exercise 2</h2>
+<pre><code>Again, in Avatar storybook
+</code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="programming-react">Programming React</h2>
+</section>
+
+<section  class=""><h2 id="big-idea-of-react">Big idea of React</h2>
+</section>
+
+<section  class=""><h2 id="view-as-function-of-state">View as function of state</h2>
+</section>
+
+<section  class=""><h2 id="-immediate-mode-">&#39;Immediate mode&#39;</h2>
+</section>
+
+<section  class=""><h2 id="state-props">State = props</h2>
+<!-- TODO image showing what's rendered is decided by props -->
+</section>
+
+<section  class=""><h2 id="props">Props</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const Avatar = ({avatar}) =&gt; (
+  &lt;img src={avatarToUrl(avatar)} /&gt;
+);
+
+const catAvatar = &lt;Avatar avatar=&#39;cat&#39; /&gt;;
+
+function avatarToUrl(avatar) {
+  return &#39;/img/avatars/&#39; + avatar + &#39;.svg&#39;;
+} 
+</code></pre></section>
+
+<section  class=""><h2 id="passing-as-objet">Passing as objet</h2>
+<pre><code>import React from &#39;react&#39;;
+
+const Avatar = ({avatar}) =&gt; (
+  &lt;img src={avatarToUrl(avatar)} /&gt;
+);
+
+const catProps = {avatar: &#39;cat&#39;};
+const catAvatar = &lt;Avatar {...avatar} /&gt;;
+
+// will have className prop too
+const specialCat = &lt;Avatar {...avatar}
+  className=&#39;special&#39;
+/&gt;;
+
+function avatarToUrl(avatar) {
+  return &#39;/img/avatars/&#39; + avatar + &#39;.svg&#39;;
+} 
+</code></pre></section>
+
+<section  class=""><h2 id="children-etc-are-also-props">Children etc are also props</h2>
+</section>
+
+<section  class=""><h2 id="tricks">Tricks</h2>
+<pre><code>const Double = ({ children }) =&gt; (
+  &lt;div&gt;
+    { children }
+    { children }
+  &lt;/div&gt;
+)
+
+const Quadruple = ({ children }) =&gt; (
+  &lt;Double&gt;
+    &lt;Double&gt;
+      { children }
+    &lt;/Double&gt;
+  &lt;/Double&gt;
+)
+
+ReactDOM.render(
+  &lt;Quadruple children={&lt;h2&gt;☀️&lt;/h2&gt;} /&gt;,
+  document.getElementById(&#39;container&#39;)
+);
+</code></pre></section>
+
+<section  class=""><h2 id="data-in-props">Data in props</h2>
+<pre><code>const Items = ({ items }) =&gt; (
+  &lt;ul&gt;
+    { items.map(child) }
+  &lt;/ul&gt;
+)
+
+function child({ title }) {
+  return &lt;li &gt;{ title }&lt;/li&gt;
+}
+
+
+// will cause an error
+const three = [{title:&quot;A&quot;}, {title:&quot;B&quot;}, {title:&quot;C&quot;}];
+const listOfThree = &lt;Items items={three} /&gt;
+
+// can fix with the &#39;key&#39; attribute
+</code></pre></section>
+
+<section  class=""><h2 id="exercise-3-">Exercise 3!</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="interaction">Interaction</h2>
+</section>
+
+<section  class=""><h2 id="v-easy-in-react">V easy in React</h2>
+</section>
+
+<section  class=""><h2 id="interpolate-event-handlers">Interpolate event handlers</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+
+const clicker = &lt;button onClick={() =&gt; alert(&#39;hi&#39;)}&gt;
+  Say hi 
+&lt;/button&gt;
+
+ReactDOM.render(clicker, document.body)
+</code></pre>
+</section>
+
+<section  class=""><h2 id="pass-in-handlers-in-props">Pass in handlers in props</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+
+const Clicker = ({handleClick}) =&gt; (
+  &lt;button onClick={handleClick}&gt;
+    Say hi 
+  &lt;/button&gt;
+)
+
+ReactDOM.render(Clicker, document.body)
+</code></pre>
+</section>
+
+<section  class=""><h2 id="sets-up-normal-dom-event-listeners">Sets up normal DOM event-listeners</h2>
+<ul>
+<li>e.g will hear bubbling events as normal</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="refs-can-be-useful-with-events">Refs can be useful with events</h2>
+<p>const ImagePicker = ({onPicked}) =&gt; {
+  let picked;</p>
+<p>  return <div>
+    <button onClick={() => onPicked(picked)}&gt;
+      Say hi 
+    </button>
+    <img src='some-image' 
+         ref={el => ( picked = el )}&gt;
+  </div>
+}</p>
+</section>
+
+<section  class=""><h2 id="storybook-has-a-way-to-see-events">Storybook has a way to see events</h2>
+<p><img src="./img/storybook-events" alt="img"></p>
+</section>
+
+<section  class=""><h2 id="code">Code</h2>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+import { storiesOf, action } from &#39;@kadira/storybook&#39;;
+
+const WithListener = ({onActivate}) =&gt; (
+  &lt;button onClick={onActivate}&gt;
+    Click me
+  &lt;/button&gt;
+)
+
+storiesOf(&#39;clicking&#39;, module)
+  .add(&#39;simple&#39;, () =&gt; (
+    &lt;WithListener onActivate={action(&#39;onPress&#39;)} /&gt;
+  ))
+</code></pre>
+</section>
+
+<section  class=""><h2 id="exercise">Exercise</h2>
+<p>  Build the MessageBox</p>
+</section>
+
+<section data-state='title' class=" title"><h2 id="redux">Redux</h2>
+</section>
+
+<section  class=""><h2 id="redux-is-a-scalable-approach-to-state">Redux is a scalable approach to state</h2>
+</section>
+
+<section  class=""><h2 id="however-complex-it-gets">However complex it gets</h2>
+</section>
+
+<section  class=""><h2 id="three-principles">Three principles</h2>
+</section>
+
+<section  class=""><h2 id="one-place-for-state-the-store">One place for state: the store</h2>
+</section>
+
+<section  class=""><h2 id="only-actions-cause-state-changes">Only actions cause state changes</h2>
+</section>
+
+<section  class=""><h2 id="reducers-return-new-states">Reducers return <em>new</em> states</h2>
+<ul>
+<li>They do not modify a state</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="redux-cycle">Redux cycle</h2>
+<p><img src="./img/redux-diagram.png" alt="redux"></p>
+<ul>
+<li>credit: <a href="https://github.com/reactjs/redux/issues/653#issuecomment-167994461">Sigmus</a></li>
+</ul>
+</section>
+
+<section  class=""><h2 id="state">State</h2>
+<ul>
+<li>Any JS values you like!</li>
+<li>Usually data-structures, e.g</li>
+</ul>
+<pre><code class="lang-javascript">const state = {
+    chats: {
+      11: { // ...
+    },
+    users: {
+      // ..
+    }
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="actions">Actions</h2>
+<ul>
+<li>Only common field is <code>type</code></li>
+</ul>
+<p><code style="color: #888; white-space: pre">
+const action = {
+  <span style="color: red">type: &quot;SEND_CHAT&quot;</span>,
+  message: &quot;hi there&quot;,
+  avatar: &quot;penguin&quot;,
+}
+</code></p>
+</section>
+
+<section  class=""><h2 id="action-creators">Action creators</h2>
+<pre><code>export const SEND_CHAT = &#39;SEND_CHAT&#39;;
+
+const sendChatAction = (message, avatar) =&gt; (
+  { message, avatar, type: SEND_CHAT }
+)
+</code></pre></section>
+
+<section  class=""><h2 id="in-today-s-app">In today&#39;s app</h2>
+<ul>
+<li>Group with static methods of classes in <code>action.js</code> files</li>
+</ul>
+<pre><code class="lang-javascript">export const SEND_CHAT = &#39;SEND_CHAT&#39;;
+// ...
+
+export class ChatActions {
+  static send() {}
+  static received() {}
+  static fetched() {}
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="reducers">Reducers</h2>
+</section>
+
+<section  class=""><h2 id="one-api-to-learn">One API to learn</h2>
+<p><code style="color: #888; white-space: pre">
+function reducer(state, action) {
+  // ...
+  return newState;
+}
+</code></p>
+</section>
+
+<section  class=""><h2 id="state">State</h2>
+<p><code style="color: #888; white-space: pre">
+function reducer(<span style="color: red">state</span>, data) {
+  // ...
+  return newState;
+}
+</code></p>
+</section>
+
+<section  class=""><h2 id="action">Action</h2>
+<p><code style="color: #888; white-space: pre">
+function reducer(state, <span style="color: red">action</span>) {
+  // ...
+  return newState;
+}
+</code></p>
+</section>
+
+<section  class=""><h2 id="new-state">New state</h2>
+<p><code style="color: #888; white-space: pre">
+function reducer(state, action) {
+  // ...
+  return <span style="color: red">newState</span>;
+}
+</code></p>
+</section>
+
+<section  class=""><h2 id="complete">Complete</h2>
+<pre><code>const up   = () =&gt; ({ type: &#39;up&#39; });
+const down = () =&gt; ({ type: &#39;down&#39; });
+
+const actions = [up(), up(), down(), up()]
+const state = actions.reduce(reducer, { count: 0 });
+
+// { ... } ?
+console.log(state);
+
+function reducer(state, action) {
+  if(action.type === &#39;up&#39;) {
+    return { ...state, count: state.count + 1 };
+  } else {
+    return { ...state, count: state.count - 1 };
+  }
+}
+</code></pre></section>
+
+<section  class=""><h2 id="wouldn-t-this-be-easier-">Wouldn&#39;t this be easier?</h2>
+<pre><code>function reducer(state, action) {
+  if(action.type === &#39;up&#39;) {
+    state.count += 1;
+  } else {
+    state.count -= 1; 
+  }
+  return state;
+}
+</code></pre></section>
+
+<section  class=""><h2 id="the-problem">The problem</h2>
+</section>
+
+<section  class=""><h2 id="lose-benefits-of-immutable-structures">Lose benefits of immutable structures</h2>
+</section>
+
+<section  class=""><h2 id="e-g-easy-change-detection">e.g easy change detection</h2>
+<pre><code>function hasStateChanged(stateA, stateB) {
+  return stateA === stateB;
+}
+</code></pre></section>
+
+<section  class=""><h2 id="mutable-version">Mutable version</h2>
+<pre><code>function hasStateChanged(stateA, stateB) {
+  // expensive, quite a tricky algorithm in JS!
+  return deepEqual(stateA, stateB);
+}
+</code></pre></section>
+
+<section  class=""><h2 id="can-t-rely-on-previous-values">Can&#39;t rely on previous values</h2>
+</section>
+
+<section  class=""><h2 id="which-is-very-useful">Which is very useful</h2>
+<pre><code>function reducer(state, action) {
+  switch(action.type) {
+    // ...
+    case SOME_TYPE:
+      return {
+        ...state,
+        previous: [...state.previous, newItem],
+      }
+  }
+} 
+</code></pre></section>
+
+<section  class=""><h2 id="stay-immutable-">Stay immutable!</h2>
+</section>
+
+<section  class=""><h2 id="how-">How?</h2>
+</section>
+
+<section  class=""><h2 id="today-js-language-features">Today: JS language features</h2>
+<ul>
+<li>Safe Object/Array usage</li>
+<li>Avoid .splice/.pop/.push etc on arrays</li>
+<li>Avoid assignment or <code>Object.assign()</code></li>
+<li>Use <code>...</code> instead!</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="exercise">Exercise</h2>
+<pre><code>FirstReactPage
+
+Building an Avatar picker
+</code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="modeling-state">Modeling state</h2>
+</section>
+
+<section  class=""><h2 id="operations-that-occur-over-time">Operations that occur over time</h2>
+</section>
+
+<section  class=""><h2 id="e-g-ajax-fetch">e.g AJAX fetch</h2>
+</section>
+
+<section  class=""><h2 id="some-people-solve-as-follows">Some people solve as follows</h2>
+<pre><code class="lang-javascript">const startState = {
+  chats: undefined, 
+  chatsLoaded: false,
+  chatLoadError: undefined,
+}
+
+const successState = {
+  chats: [ { id: &#39;abbc&#39;, text: &#39;hi&#39;, //....
+  chatsLoaded: true,
+  chatLoadError: undefined,
+}
+
+const failureState = {
+  chats: undefined,
+  chatsLoaded: true,
+  chatLoadError: Error(&quot;hi&#39;),
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="i-prefer-an-elm-inspired-approach">I prefer an Elm inspired approach</h2>
+</section>
+
+<section  class=""><h2 id="remotevalue">RemoteValue</h2>
+</section>
+
+<section  class=""><h2 id="let-s-take-a-look-at-the-source-code">Let&#39;s take a look at the source code</h2>
+</section>
+
+<section  class=""><h2 id="exercise">Exercise</h2>
+<p>  Update chat story to support loading, and error views</p>
+<p>  Exercise - ChatThread part 2 </p>
+</section>
+
+<section data-state='title' class=" title"><h2 id="multiple-references-to-data">Multiple references to data</h2>
+</section>
+
+<section  class=""><h2 id="using-same-data-in-multiple-places">Using same data in multiple places</h2>
+</section>
+
+<section  class=""><h2 id="two-approaches">Two approaches</h2>
+</section>
+
+<section  class=""><h2 id="normalized">Normalized</h2>
+</section>
+
+<section  class=""><h2 id="aka-relational">AKA relational</h2>
+</section>
+
+<section  class=""><h2 id="have-tables-for-each-type-with-keys">Have &#39;tables&#39; for each type, with keys</h2>
+</section>
+
+<section  class=""><h2 id="where-you-cross-reference-use-ids">Where you cross reference, use IDs</h2>
+</section>
+
+<section  class=""><h2 id="second-option-de-normalize">Second option: de-normalize</h2>
+</section>
+
+<section  class=""><h2 id="inline-the-data">Inline the data</h2>
+</section>
+
+<section  class=""><h2 id="for-redux-normalize">For Redux: normalize</h2>
+</section>
+
+<section  class=""><h2 id="updating-immutably-is-already-fiddly">Updating immutably is already fiddly</h2>
+</section>
+
+<section data-state='bad' class=" bad"><h2 id="manually-keeping-all-versions-up-to-date">Manually keeping all versions up to date</h2>
+</section>
+
+<section  class=""><h2 id="e-g">e.g</h2>
+<pre><code>const state = {
+  selectedChat: {
+    id: 10,
+    message: &#39;hi there&#39;, 
+  },
+  chats: {
+    10: { message: &#39;hi there&#39;, },
+    26: { // ...
+    27: { // ...
+  },
+};
+</code></pre></section>
+
+<section  class=""><h2 id="we-now-have-versions-of-the-same-data-">We now have versions of the same data!</h2>
+</section>
+
+<section  class=""><h2 id="spot">SPOT</h2>
+<ul>
+<li>Single</li>
+<li>Point</li>
+<li>Of</li>
+<li>Truth</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="use-selectors-to-hide-structure-of-data">Use selectors to hide structure of data</h2>
+</section>
+
+<section  class=""><h2 id="pass-state-freely-but-only-access-via-selectors">Pass state freely, but only access via Selectors</h2>
+</section>
+
+<section  class=""><h2 id="e-g-waaaaay-coupled">e.g waaaaay coupled</h2>
+<pre><code>const ChatView = ({ state }) =&gt; {
+  &lt;ul&gt;
+    {
+      (state.chat.chats &amp;&amp; state.chats.chats.state === &#39;here&#39;
+        ? state.chat.chats.value
+        : [])
+      .map(chat =&gt; (
+        {
+          ...chat,
+          isMine: state.user &amp;&amp; state.user.id === chat.id,
+        }
+      ))
+      .map(chatItem)
+    }
+  &lt;/ul&gt;
+};
+</code></pre></section>
+
+<section  class=""><h2 id="e-g-keep-decoupled">e.g keep decoupled</h2>
+<pre><code>const ChatView = ({ state }) =&gt; {
+  &lt;ul&gt;
+    {
+      ChatSelectors.loadedChats(state)
+      .map(chatItem)
+    }
+  &lt;/ul&gt;
+};
+</code></pre></section>
+
+<section  class=""><h2 id="use-selectors-to-turn-ids-into-data">Use selectors to turn &#39;ids&#39; into data</h2>
+<pre><code>export class ChatSelectors {
+  static selectedChat(state) {
+    return state.chat.selectedId
+      ? getRow(state.chat.chats, state.chat.selectedId)
+      : undefined;
+  }
+}
+</code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="scary-world-outside-redux">Scary world outside Redux</h2>
+</section>
+
+<section  class=""><h2 id="redux">Redux</h2>
+<ul>
+<li>Deterministic</li>
+<li>Synchronous</li>
+<li>Easy!</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="sadly-">Sadly...</h2>
+</section>
+
+<section  class=""><h2 id="we-do-need-to-interact-with-the-real-world">We do need to interact with the real world</h2>
+</section>
+
+<section  class=""><h2 id="side-effects">Side-effects</h2>
+<ul>
+<li>Non-deterministic</li>
+<li>A-synchronous</li>
+<li>Tricky</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="how-do-we-bridge-the-gap-">How do we bridge the gap?</h2>
+</section>
+
+<section  class=""><h2 id="many-projects">Many projects</h2>
+<ul>
+<li>redux-thunk</li>
+<li>redux-sagas</li>
+<li>etc...</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="today-i-ll-advocate">Today I&#39;ll advocate</h2>
+</section>
+
+<section  class=""><h2 id="kiss">KISS</h2>
+</section>
+
+<section  class=""><h2 id="middleware">Middleware</h2>
+</section>
+
+<section  class=""><h2 id="actions-in-actions-out">Actions in, actions out</h2>
+</section>
+
+<section  class=""><h2 id="listen-for-certain-actions-and-do-">Listen for certain actions, and do...</h2>
+</section>
+
+<section  class=""><h2 id="-whatever">...whatever</h2>
+<ul>
+<li>talk to APIs</li>
+<li>IndexedDB</li>
+<li>LocalStorage</li>
+<li>Cookies</li>
+<li>etc</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="then-dispatch-actions">Then dispatch actions</h2>
+</section>
+
+<section  class=""><h2 id="we-re-talking-to-two-types-of-api-today">We&#39;re talking to two types of API today</h2>
+</section>
+
+<section  class=""><h2 id="request-response">Request-response</h2>
+</section>
+
+<section  class=""><h2 id="real-time">Real-time</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="designing-react-redux-apps">Designing React + Redux apps</h2>
+</section>
+
+<section  class=""><h2 id="thanks-">Thanks!</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="es20xx">ES20xx</h2>
+</section>
+
+<section  class=""><h2 id="important-highlights">Important highlights</h2>
+</section>
+
+<section  class=""><h2 id="-const-"><code>const</code></h2>
+<ul>
+<li>In functional code, we use <code>const</code></li>
+<li>We don&#39;t reassign in application code - only library/helper code when required</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="-const-"><code>const</code></h2>
+<pre><code>const item = {};
+// not allowed
+item = {};
+</code></pre></section>
+
+<section  class=""><h2 id="array-spread-es2015">Array spread - ES2015</h2>
+<pre><code>const listA = [1,2,3];
+const listB = [...listA, 4, 5];
+const listC = [-2, -1, 0, ...listA];
+const listD = [...listA, ...listA];
+
+// [1, 2, 3], [1, 2, 3, 4, 5], [-2, -1, 0, 1, 2, 3], [1, 2, 3, 1, 2, 3]
+console.log(listA, listB, listC, listD);
+</code></pre></section>
+
+<section  class=""><h2 id="argument-spreading">Argument spreading</h2>
+<pre><code>function joins(...args) {
+  return args.join(&#39;-&#39;);
+}
+
+// 1-2-3-4
+console.log(joins(1,2,3,4)) 
+
+// 1-2-3-4-5-6-7
+console.log(joins(...[1,2,3,4], 5, ...[6], 7))
+</code></pre></section>
+
+<section  class=""><h2 id="object-spread">Object spread</h2>
+<ul>
+<li>ES2017 proposal, supported by babel</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="object-spread">Object spread</h2>
+<pre><code>const chatA = { message: &quot;hi&quot;, avatar: &quot;hippo&quot; };
+const chatB = { ...chatA, avatar: &quot;snake&quot; };
+const chatC = { ...chatB, avatar: &quot;monkey&quot; };
+</code></pre></section>
+
+<section  class=""><h2 id="-const-doesn-t-relate-to-immutability"><code>const</code> doesn&#39;t relate to immutability</h2>
+<ul>
+<li>You can still mutate mutable objects referred to by a <code>const</code></li>
+<li>But: if you can, don&#39;t mutate anything in a Redux codebase!</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="-const-mutability"><code>const</code> + mutability</h2>
+<pre><code>const chatA = { message: &quot;hi&quot;, avatar: &quot;hippo&quot; };
+
+// this works, but, as we&#39;ll see, will make your code hard to work with
+chatA.message = &#39;another&#39;;
+</code></pre></section>
+
+<section  class=""><h2 id="functions">Functions</h2>
+<ul>
+<li>Default arguments, implicit returns</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="function-syntax">Function syntax</h2>
+<pre><code>const makeChat = (message, avatar = &quot;hippo&quot;) =&gt; (
+  { message, avatar }
+);
+
+function makeChange(message, avatar) {
+  avatar = avatar == null ? &#39;hippo&#39; : avatar;
+  return { message: message, avatar: avatar }
+}
+</code></pre></section>
+
+<section  class=""><h2 id="static-functions">Static functions</h2>
+<ul>
+<li>Handy for grouping related functions in an IDE friendly way</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="static-methods">Static methods</h2>
+<pre><code>export class UserSelectors {
+  static get(state, id) {
+    // ...
+  } 
+
+  static all(state) {
+    // ...
+  } 
+}
+
+// elsewhere
+import { UserSelectors } from &quot;./UserSelectors&quot;;
+
+const everyone = UserSelectors.all(state)
+</code></pre></section>
+
+<section  class=""><h2 id="everyone-happy-">Everyone happy?</h2>
+<ul>
+<li>Can try it together at: babeljs.io/repl</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="import-export">Import/export</h2>
+<ul>
+<li>Today, stick to named imports</li>
+<li>With some default imports</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="e-g">e.g</h2>
+<pre><code>import React from &#39;react&#39;;
+
+export function SomeComponent() {
+}
+
+import { OtherComponent } from &quot;./OtherComponent&quot;;
+</code></pre></section>
+
+</div>
+</div>
+
+<!-- demo code -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/lodash/index.js"></script>
+
+<!-- live coding -->
+<script src=js/little-console.js></script>
+<script src=js/showConsoles.js></script>
+
+<!-- reveal -->
+<script src="node_modules/reveal.js/lib/js/head.min.js"></script>
+<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="node_modules/reveal.js/js/reveal.js"></script>
+<script src="js/revealConfig.js"></script>
+
+</body>

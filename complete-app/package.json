@@ -1,0 +1,24 @@
+{
+  "name": "training-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "5.0.4",
+    "redux": "3.6.0",
+    "redux-logger": "3.0.1"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "2.35.3",
+    "ls": "0.2.1",
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "storybook": "start-storybook -p 9001 -c .storybook -s public",
+    "eject": "react-scripts eject"
+  }
+}

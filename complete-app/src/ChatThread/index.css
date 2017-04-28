@@ -1,0 +1,64 @@
+
+
+.ChatThread {
+    /* reset list styling */
+    margin: 0;
+    padding: 1em;
+
+    overflow: hidden;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.ChatThreadItem {
+    border-radius: .5rem;
+    margin: 0 0 1em 0;
+    padding: 0 1em;
+
+    width: calc(100% - 2em);
+
+    min-height: 4rem;
+
+    flex: auto;
+    flex-grow: 0;
+
+    background: lightskyblue;
+    color: darkblue;
+
+    float: left;
+
+    line-height: 4em;
+    display: flex;
+
+    margin-right: 2em;
+}
+
+
+
+.ChatThread .Avatar {
+    font-size: 1.5em;
+    width: 1em;
+
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+/* highlight your own messages */
+.ChatThreadItem.mine {
+    background: lightseagreen;
+    color: #134941;
+
+    flex-direction: row-reverse;
+
+    margin-right: 0;
+    margin-left: 2em;
+}
+.ChatThreadItem.mine .Avatar {
+    margin-right: 0rem;
+    margin-left: 1rem;
+}
+
