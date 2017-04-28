@@ -1,5 +1,8 @@
 ## React + Redux
 
+[@timruffles](https://www.truffles.me.uk)
+[timr.co/blog](https://www.timr.co/blog)
+
 ## Agenda
 
 - React + JSX
